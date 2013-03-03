@@ -9,7 +9,7 @@
           %ul.nav
             %li.active
               %a.dropdown-toggle{:'data-toggle' => 'dropdown'}
-                Find Attractions
+                Locate an Attraction
                 %b.caret
               %ul.dropdown-menu
                 %li
@@ -21,22 +21,42 @@
                     %i.icon-th-large
                     Featuring  
             %li
-              %a{href:'#'}
-                Find Guides
+              %a.dropdown-toggle{:'data-toggle' => 'dropdown'} 
+                Locate a Guide
+                %b.caret
+            %ul.dropdown-menu
+              %li
+                %a#map_view_link{href:'#'}
+                  %i.icon-map-marker
+                  Map View
+              %li
+                %a#list_view_link{href:'#'}
+                  %i.icon-th-large
+                  Recommended          
       .row-fluid#map_view
         =render 'map'
       .row-fluid#list_view
         =render 'attraction'
+      .row-fluid#profile_view
+        =render 'profile'
     .span2
     
 :coffeescript
   $(document).ready ->
     $('#list_view').hide()
+    $('#profile_view').hide()
     
   $('#map_view_link').click ->
     $('#map_view').show()
     $('#list_view').hide()
+    $('#profile_view').hide()
 
   $('#list_view_link').click ->
     $('#map_view').hide()
     $('#list_view').show()
+    $('#profile_view').hide()
+  
+  $('#profile_view_link').click ->
+    $('#map_view').hide()
+    $('#list_view').hide()
+    $('#profile_view').show()
