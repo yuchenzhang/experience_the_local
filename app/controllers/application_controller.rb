@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_traveller!
+  # before_filter :authenticate_traveller!
   
   private
   def authenticate_user!
