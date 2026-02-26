@@ -19,9 +19,9 @@
                 %li
                   %a#list_view_link{href:'#'}
                     %i.icon-th-large
-                    Featuring  
+                    Featuring
             %li
-              %a.dropdown-toggle{:'data-toggle' => 'dropdown'} 
+              %a.dropdown-toggle{:'data-toggle' => 'dropdown'}
                 Locate a Guide
                 %b.caret
             %ul.dropdown-menu
@@ -32,31 +32,35 @@
               %li
                 %a#list_view_link{href:'#'}
                   %i.icon-th-large
-                  Recommended          
+                  Recommended
       .row-fluid#map_view
-        =render 'map'
+        = render 'map'
       .row-fluid#list_view
-        =render 'attraction'
+        = render 'attraction'
       .row-fluid#profile_view
-        =render 'profile'
+        = render 'profile'
     .span2
-    
-:coffeescript
-  $(document).ready ->
-    $('#list_view').hide()
-    $('#profile_view').hide()
-    
-  $('#map_view_link').click ->
-    $('#map_view').show()
-    $('#list_view').hide()
-    $('#profile_view').hide()
 
-  $('#list_view_link').click ->
-    $('#map_view').hide()
-    $('#list_view').show()
-    $('#profile_view').hide()
-  
-  $('#profile_view_link').click ->
-    $('#map_view').hide()
-    $('#list_view').hide()
-    $('#profile_view').show()
+:javascript
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('list_view').style.display = 'none';
+    document.getElementById('profile_view').style.display = 'none';
+  });
+
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'map_view_link') {
+      document.getElementById('map_view').style.display = '';
+      document.getElementById('list_view').style.display = 'none';
+      document.getElementById('profile_view').style.display = 'none';
+    }
+    if (e.target && e.target.id === 'list_view_link') {
+      document.getElementById('map_view').style.display = 'none';
+      document.getElementById('list_view').style.display = '';
+      document.getElementById('profile_view').style.display = 'none';
+    }
+    if (e.target && e.target.id === 'profile_view_link') {
+      document.getElementById('map_view').style.display = 'none';
+      document.getElementById('list_view').style.display = 'none';
+      document.getElementById('profile_view').style.display = '';
+    }
+  });

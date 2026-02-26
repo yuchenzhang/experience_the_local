@@ -1,15 +1,20 @@
-staging: &default              
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: etl_staging
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
   username: postgres
 
 development:
-  <<: *default 
+  <<: *default
   database: etl_development
 
 test:
-  <<: *default 
+  <<: *default
   database: etl_test
+
+production:
+  <<: *default
+  database: etl_production
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
