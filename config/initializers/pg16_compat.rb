@@ -12,3 +12,21 @@ module ActiveRecord
     end
   end
 end
+
+require 'arel/visitors/to_sql'
+
+module Arel
+  module Visitors
+    class ToSql < Arel::Visitors::Visitor
+      unless method_defined?(:visit_Integer)
+        alias_method :visit_Integer, :literal
+      end
+    end
+
+    class DepthFirst < Arel::Visitors::Visitor
+      unless method_defined?(:visit_Integer)
+        alias_method :visit_Integer, :terminal
+      end
+    end
+  end
+end
